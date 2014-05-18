@@ -13,6 +13,7 @@ Highly inspired by [echo.js](https://github.com/toddmotto/echo) by Todd Motto.
 
 # Example
 
+```javascript
   Delay.config({
     delay: 250 // 250ms
   });
@@ -23,6 +24,7 @@ Highly inspired by [echo.js](https://github.com/toddmotto/echo) by Todd Motto.
     callback: function(){ alert('in view'); },
     once: true, //fire the event only one time
   })
+```
 
 
 _______________________
