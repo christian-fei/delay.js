@@ -13,7 +13,6 @@ window.Delay = (function (window, document, undefined) {
       var self = store[i];
       if ( self && !self.called && _inView(self)) {
         if( self.once ){
-          self.called = true;
           store.splice(i,1);
           l = store.length;
         }
@@ -37,7 +36,6 @@ window.Delay = (function (window, document, undefined) {
     store.push({
       element: options.element,
       callback: options.callback,
-      called: false,
       once: !!options.once,
       offset: options.offset
     });
