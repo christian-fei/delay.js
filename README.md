@@ -13,16 +13,16 @@ Highly inspired by [echo.js](https://github.com/toddmotto/echo) by Todd Motto.
 
 # Example
 
-Delay.config({
-  delay: 250 // 250ms
-});
+  Delay.config({
+    delay: 250 // 250ms
+  });
 
-Delay.on({
-  element: document.getElementById('delay-until-in-view'),
-  offset: 500,
-  callback: function(){ alert('in view'); },
-  once: true, //fire the event only one time
-})
+  Delay.on({
+    element: document.getElementById('delay-until-in-view'),
+    offset: 500,
+    callback: function(){ alert('in view'); },
+    once: true, //fire the event only one time
+  })
 
 
 _______________________
