@@ -21,7 +21,11 @@ Delay.config({
 Delay.subscribe({
   element: document.getElementById('delay-until-in-view'),
   offset: 500,
-  callback: function(){ alert('in view'); },
+  callback: function(){
+    // ´this´ in this context refers to the element itself
+    function rand(){ return Math.floor(Math.random()*255); };
+    this.style.backgroundColor = "rgb("+rand()+","+rand()+","+rand()+")";
+  },
   once: true, //fire the event only one time
 })
 ```
