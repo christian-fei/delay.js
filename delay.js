@@ -14,10 +14,9 @@ window.Delay = (function (window, document, undefined) {
       if ( self && !self.called && _inView(self)) {
         if( self.once ){
           store.splice(i,1);
-          l = store.length;
+          l--;
         }
-        self.callback();
-        i--;
+        self.callback.call(self.element);
       }
     }
   };
@@ -27,17 +26,17 @@ window.Delay = (function (window, document, undefined) {
     checkTimeout = setTimeout(_check, delay);
   };
 
-  var _delay = function(_delay){
+  var _config = function(_delay){
     delay = parseInt(_delay) || delay;
   };
 
-  var _on = function(options) {
+  var _subscribe = function(options) {
     if( !(options.element instanceof Element) || !(options.callback instanceof Function) )return;
     store.push({
       element: options.element,
       callback: options.callback,
       once: !!options.once,
-      offset: options.offset
+      offset: options.offset || 250
     });
 
     _throttle();
@@ -53,7 +52,7 @@ window.Delay = (function (window, document, undefined) {
 
 
   return {
-    delay  : _delay,
-    on      : _on,
+    config          : _config,
+    subscribe      : _subscribe,
   };
 })(window, document);
