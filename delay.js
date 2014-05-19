@@ -3,7 +3,23 @@ window.Delay = (function (window, document, undefined) {
 
   var store = [], delay = 250, checkTimeout, registered = false;
 
-  _start();
+  var _init = function(opt){
+    _registerOptions( opt );
+    _registerListeners();
+  };
+
+  var _registerListeners = function(){
+    if( registered )return;
+    registered = true;
+    if (document.addEventListener) { window.addEventListener('scroll', _throttle, false); }
+    else { window.attachEvent('onscroll', _throttle); }
+  };
+
+  var _registerOptions = function(opt){
+    if( opt ){
+      delay = parseInt(opt._delay) || delay;
+    }
+  };
 
   var _inView = function (obj) {
     var coords = obj.element.getBoundingClientRect();
@@ -28,18 +44,8 @@ window.Delay = (function (window, document, undefined) {
     checkTimeout = setTimeout(_check, delay);
   };
 
-  var _config = function(_delay){
-    delay = parseInt(_delay) || delay;
-  };
-
-  var _start = function(){
-    if( registered )return;
-    registered = true;
-    if (document.addEventListener) { window.addEventListener('scroll', _throttle, false); }
-    else { window.attachEvent('onscroll', _throttle); }
-  };
-
   var _subscribe = function(options) {
+    if( !registered ){ _init(); }
     if( !(options.element instanceof Element) || !(options.callback instanceof Function) )return;
     store.push({
       element: options.element,
@@ -51,9 +57,8 @@ window.Delay = (function (window, document, undefined) {
     _throttle();
   };
 
-
   return {
-    config         : _config,
+    init           : _init,
     subscribe      : _subscribe,
   };
 })(window, document);
