@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+      body{
+        background-color: #ddd;
+      }
+
+      li{
+        display: inline-block;
+        height: 1.5em;
+        width: 100%;
+      }
+      li:nth-child(even){
+        border-left: 1px solid #333;
+        border-bottom: 1px solid #333;
+        background-color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li>scroll</li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li id="special">i will trigger every time the timeout runs</li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li>scroll</li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li>scroll</li>
+      <li id="special-once">i will trigger once</li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li>scroll</li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <script src="delay.js"></script>
+    <script>
+      var rand = function(){return Math.floor(Math.random()*255);};
+
+      Delay.config({delay:100});
+
+      Delay.subscribe({
+        element: document.getElementById('special'),
+        callback: function(){
+          this.style.backgroundColor = "rgb("+rand()+","+rand()+","+rand()+")";
+        },
+        offset: 100,
+        once: false,
+      });
+
+      Delay.subscribe({
+        element: document.getElementById('special-once'),
+        callback: function(){
+          this.style.backgroundColor = "rgb("+rand()+","+rand()+","+rand()+")";
+        },
+        offset: 100,
+        once: true,
+      });
+    </script>
+  </body>
+</html>
