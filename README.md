@@ -18,7 +18,7 @@ Delay.config({
   delay: 250 // 250ms
 });
 
-Delay.on({
+Delay.subscribe({
   element: document.getElementById('delay-until-in-view'),
   offset: 500,
   callback: function(){ alert('in view'); },
@@ -49,7 +49,7 @@ Global configuration for the Delay library. Valid option keys are: **delay**/Int
 
 
 
-## .on
+## .subscribe
 
 #### parameters
 
@@ -68,3 +68,4 @@ The **once** parameter determines if the callback function should be fired only 
 
 The **offset** parameter sets the desired offset to calculate wether the element is in view or not.
 
+**Note**: in the callback function `this` will refer to the element itself.
