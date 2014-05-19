@@ -30,6 +30,22 @@ Delay.subscribe({
 })
 ```
 
+# Real world use case
+
+```javascript
+/*
+ Load Twitter follow button only when "needed", or at least delay the loading of assets until the Twitter follow button is almost in view
+*/
+Delay.subscribe({
+  element: document.querySelector('.twitter-follow-button'),
+  callback: function(){ /* bloat of javascript from the twitter documentation :) */ },
+  offset: 500,
+  once: true //important in this case
+});
+
+```
+
+
 _______________________
 
 
