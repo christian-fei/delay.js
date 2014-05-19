@@ -1,7 +1,9 @@
 window.Delay = (function (window, document, undefined) {
   'use strict';
 
-  var store = [], delay = 250, checkTimeout;
+  var store = [], delay = 250, checkTimeout, registered = false;
+
+  _start();
 
   var _inView = function (obj) {
     var coords = obj.element.getBoundingClientRect();
@@ -30,6 +32,13 @@ window.Delay = (function (window, document, undefined) {
     delay = parseInt(_delay) || delay;
   };
 
+  var _start = function(){
+    if( registered )return;
+    registered = true;
+    if (document.addEventListener) { window.addEventListener('scroll', _throttle, false); }
+    else { window.attachEvent('onscroll', _throttle); }
+  };
+
   var _subscribe = function(options) {
     if( !(options.element instanceof Element) || !(options.callback instanceof Function) )return;
     store.push({
@@ -40,19 +49,11 @@ window.Delay = (function (window, document, undefined) {
     });
 
     _throttle();
-
-    if (document.addEventListener) {
-      window.addEventListener('scroll', _throttle, false);
-    } else {
-      window.attachEvent('onscroll', _throttle);
-    }
   };
 
 
-
-
   return {
-    config          : _config,
+    config         : _config,
     subscribe      : _subscribe,
   };
 })(window, document);
