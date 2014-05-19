@@ -14,7 +14,7 @@ Highly inspired by [echo.js](https://github.com/toddmotto/echo) by Todd Motto.
 # Example
 
 ```javascript
-Delay.config({
+Delay.init({
   delay: 250 // 250ms
 });
 
@@ -55,7 +55,7 @@ _______________________
 Delay.
 
 
-## .config
+## .init
 
 #### parameters
 
